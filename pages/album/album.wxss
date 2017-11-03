@@ -1,0 +1,38 @@
+/**header**/
+.header{background: #52d2af url('https://develop.mmmee.cn/LingMeng/resources/timeimg/wavesBg.png') bottom center no-repeat;text-align: center;position: relative;height: 164px;background-size: 100% auto;}
+.headerBg{position: absolute;top: 0;width: 76px;height:46px;z-index: 1}
+.headerBg1{left:14%;}
+.headerBg2{right:14%;transform:scaleX(-1)}
+.header .user{display: flex;flex-direction: column;text-align: center;color: #fff;position: absolute;left: 50%;top: 40%;transform: translate(-50%,-50%)}
+.header .userPortrait{width: 56px;height: 56px;border:4rpx solid #32c49d;border-radius:28px;margin:auto;margin-bottom:5px;background: #fff}
+.userInfo{font-size: 36rpx;line-height: 1.2}
+.userName{display: block}
+.userAge{position: relative;font-size: 30rpx;}
+.userAge::before ,.userAge::after{content: "";display: block;top:50%;height:1px;width: 72rpx;position: absolute;z-index: 9;background: #fff}
+.userAge::after{left:110%;}
+.userAge::before{right:110%}
+.switchBaby{position: absolute;left: 18rpx;top: 16px;color: #fff;border: 1px solid #fff;height: 24px;border-radius: 12px;padding: 0 10px;line-height: 24px;z-index: 2}
+
+/*content*/
+.timelist{margin: 0 36rpx;position: relative;width: auto}
+.timelist .title{font-weight: bold;position: relative;font-size: 32rpx;margin-top:30px;margin-bottom: 20px}
+.timelist .title span{color: #52d2af;margin-right: 5px;vertical-align: sup}
+.timelist .title image{width: 24px;height: 24px;margin-right: 5px;vertical-align:sub;line-height: 0}
+.timelist .title::before{content: "";display: block;width:1px;height: 24px;background:#52d2af;bottom:100%;left:12px;z-index: 8;position: absolute}
+.mouthSec{margin-bottom: 24px;}
+.timelist .title.yearNew{margin-top: 0}
+.mouthCon{border-radius: 24rpx;overflow: hidden}
+.mouthTitle{background: #52d2af;height: 36px;line-height: 36px;padding: 24rpx;display: flex;flex-direction: row;justify-content: space-between;align-items: center;color: #fff;font-size: 30rpx}
+.mouthTitle .mouthNum{font-weight: bold;font-size: 32rpx;}
+.more{font-size: 27rpx}
+.mouthPics{background: #fff;padding: 24rpx 0 24rpx 3.33%;display: flex;flex-direction: row;}
+.mouthPics image{margin-right:3.33%;height: 188rpx;border-radius: 24rpx;width: 30%}
+
+.publicIcons{position: fixed;right: 36rpx;bottom: 20px;z-index: 10}
+.public_btn1 , .public_btn2 ,.camera{color: #fff;text-align: center;box-shadow: 0px 1px 4px rgba(0,0,0,0.26);z-index: 12}
+.camera{background: rgba(46,204,113,0.9);width: 56px;height: 56px;border-radius: 28px;}
+.camera .iconfont{font-size: 32px;line-height: 1.6}
+.public_btn1 ,.public_btn2{position: absolute;color: #fff;width: 46px;height: 46px;border-radius: 23px;font-size: 24rpx;transform: scale(0)}
+.public_btn1{background: rgba(78,196,164,0.9);bottom:68%;right:110%;z-index: 9;line-height: 1.2;box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-o-box-sizing: border-box;padding-top:8px}
+.public_btn2{background: rgba(0,160,233,0.9);bottom:120%;z-index: 9;line-height: 46px}
+.pupBg{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: rgba(0,0,0,0.6);z-index: 9}

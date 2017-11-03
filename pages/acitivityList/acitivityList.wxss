@@ -1,0 +1,11 @@
+.scrollcon{margin-bottom: 48px;}
+.activityItem{margin-top: 10px;background: #fff;padding: 10px 36rpx;display: flex;flex-direction: row;align-items: center;position: relative}
+.activityItem radio{width:24px}
+.activityItem image{width: 96px;height: 96px;border-radius: 5px;margin: 0 10px;position: relative;z-index: 1}
+.itemInfo{flex: 1;overflow: hidden ;text-overflow: ellipsis;}
+.itemInfo text{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 1.8;max-width: 375rpx}
+.itemInfo .title{font-size: 34rpx;color: #313131;}
+.itemInfo .address{font-size: 24rpx}
+.itemInfo .time{color: #b5b5b5;font-size: 24rpx}
+.itemInfo .price{color: #ff7575;font-size: 30rpx}
+.defaultCon{font-size: 32rpx;color: #333}

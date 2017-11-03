@@ -1,0 +1,9 @@
+<!--pages/inviteDefault/inviteDefault.wxml-->
+<view class="content tc">
+    <view class="defaultCon">
+        <image src="/assets/imgs/default_invite.png" style="width:148px;height:138px;margin:20px auto" mode="aspectFit"></image>
+        <text style="color:#333;font-size:27rpx;line-height:3">\n真挚的邀请你一起来见证<text class="color-green" style="font-size:32rpx">“{{children}}”</text>的成长！</text>     
+        <text>\n加入时光 · 妈妈蜜，有趣好玩的等着你们哟！</text>  
+    </view>
+    <button bindtap="navBack" class="btn_bottom">邀请{{role}}加入</button>
+</view>

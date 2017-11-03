@@ -1,0 +1,3 @@
+/* pages/noAuthorize/noAuthorize.wxss */
+page{position: relative}
+.defaultTxt{margin-top: 100px}

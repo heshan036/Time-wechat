@@ -1,0 +1,10 @@
+<!--pages/milestone/milestone.wxml-->
+<view class="milestoneLIST">
+    <block wx:for="{{times}}">
+        <view class="milestone" bindtap="topublicPics" data-stonetitle="{{item.stoneTitle}}">
+          <view class="titleIcon"><image src="{{item.iconUrl}}"></image></view>
+          <view class="title">{{item.stoneTitle}}<span class="iconfont icon-xiaoshumiao"></span></view>
+          <view class="lineIcon"><image src="/assets/imgs/ico_stone.png" mode="aspectFit"></image></view>
+      </view>
+    </block>
+</view>

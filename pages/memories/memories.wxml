@@ -1,0 +1,18 @@
+<!--pages/memories/memories.wxml-->
+<view class="container memories">
+   <block wx:for="{{memories}}" wx:key="title">
+      <view class="memoryItem" wx:if="{{item.imgURL == ''||item.imgURL ==undefined}}"><image src="/assets/imgs/memories_default{{index}}.png" class="default" mode="aspectFit"></image></view>
+      <view class="memoryItem" bindtap="toPlayimgs" wx:if="{{item.imgURL != ''&&item.imgURL !=undefined}}" data-category="{{index}}">
+          <image src="{{item.imgURL}}" mode="aspectFill"></image>
+          <view class="memoryTag">
+                <view class="memoryTagcon">
+                    <view class="videoIcon"><span class="iconfont icon-bofang"></span></view>
+                    <view class="memoryTxt">
+                        <text class="title">{{item.title}}\n</text>
+                        <text class="time">{{item.time}}</text>
+                    </view>
+                </view>     
+          </view>
+      </view>
+    </block> 
+</view>

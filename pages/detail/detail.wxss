@@ -1,0 +1,19 @@
+/* pages/detail/detail.wxss */
+.container{margin:16rpx;background: #fff;border-radius:8px;position: relative}
+.container::before{content: '';display: block;position: absolute;height: 20px;width: 96rpx;border-radius: 12px;top:12px;left:-48rpx;border:2px solid #52d2af}
+.stoneTitle{padding-bottom:16px;text-align: center;color: #4ec4a4;background: url(/assets/imgs/topinfoBg.png) top center no-repeat;background-size: 60% auto;}
+.stoneIcon{width: 146rpx;height: 146rpx;border-radius: 50%;background: #52d2af;margin:5px auto 8px;position: relative}
+.stoneIcon image{max-width: 60%;max-height:60%;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);z-index: 1}
+.stoneTxt{position: relative;font-size: 36rpx;}
+.stoneTxt::before,.stoneTxt::after{content: '';display: block;position: absolute;height: 1px;width: 64rpx;background: #52d2af;top: 50%}
+.stoneTxt::before{right: 105%}
+.stoneTxt::after{left: 105%}
+.timeIntro{margin:32px 0 16px;}
+.timeIntro .title{font-size: 32rpx;text-align: center;margin-bottom: 4px;color: #333}
+.timeItem{margin:16px 36rpx;position: relative}
+.imgBox{display: flex;flex-direction: row;flex-wrap: wrap;padding: 16px 0;width: 100%;box-sizing: border-box}
+.imgBox image{margin-right: 2%;width:49%;height: 132px;border-radius: 3px;margin-bottom: 20rpx}
+image:last-child,.imgBox image:nth-child(3n+2){margin-right: 0}
+.imgBox image:nth-child(3n),.imgBox.imgBox2 image:last-child{width: 100%;margin-right: 0}
+
+.video{width: 100%;}

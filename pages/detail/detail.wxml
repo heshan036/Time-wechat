@@ -1,0 +1,21 @@
+<!--pages/detail/detail.wxml-->
+<view class="container">
+   <view class="timeIntro">
+     <view class="stoneTitle">
+        <view class="stoneIcon"><image src="/assets/imgs/babySmile.png"></image></view>
+        <text class="stoneTxt">宝宝第一次笑</text>
+     </view>
+      <view class="title">宝宝第一次笑</view>
+      <view class="info">宝宝第一次笑宝宝第一次笑宝宝第一次笑</view>
+   </view>
+   <view class="imgBox {{ItemLayout?'imgBox2':''}}">
+        <block wx:for="{{picList}}" wx:for-item="itemPic" wx:key="id" wx:if="{{typeFlag == '0'}}">
+            <image  wx:if="{{itemPic.loaded}}" src="{{itemPic.url}}" class="fade_in" mode="aspectFill"></image>
+        </block>  
+        <video src="{{videoUrl}}"  controls="{{videoCtr}}" wx:if="{{typeFlag == '1'}}" poster="{{posterUrl}}" class="video" objectFit='fill'></video>
+    </view>
+</view>
+
+<!-- 引入图片预加载组件 -->
+<import src="/assets/img-loader/img-loader.wxml"/>
+<template is="img-loader" data="{{ imgLoadList }}"></template>

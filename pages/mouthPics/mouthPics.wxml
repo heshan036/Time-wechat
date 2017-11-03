@@ -1,0 +1,44 @@
+
+<view  style="height:auto" class="timelist">
+    <view class="editPics" bindtap="{{checkboxdisabled?'editPics':'concelEditPics'}}" wx:if="{{editFlag==10}}"><text>{{editTxt}}</text></view>
+    <checkbox-group bindchange="checkboxChange">
+        <block  wx:for="{{dateList}}" wx:key="day">
+            <view class="dayItem">
+                <view class="dayItem_title">{{item.showDay}}</view>
+                   <view class="dayItem_pics">
+                        <block wx:for="{{item.picList}}" wx:for-item="itemPic" wx:key="id}">
+                          <label class="checkbox" bindtap="{{checkboxdisabled?'showPup':''}}" value="{{itemPic.id}}" data-id="{{itemPic.id}}">
+                              <checkbox value="{{itemPic.id}}" checked="{{itemchecked}}" disabled="{{checkboxdisabled}}" hidden="{{checkboxdisabled}}"/>
+                              <image src="{{basePath}}{{itemPic.thumbUrl}}" data-id="{{itemPic.id}}"  mode="aspectFill"></image>
+                              <!--<text class="choose"></text>-->
+                          </label>
+                         </block>
+                    </view>  
+            </view>
+        </block>       
+    </checkbox-group>
+</view>
+<import src="../template/bottomtpl.wxml"/>
+<template is="msgItem" data="{{btnHeight}}"/>
+<button loading="{{btnloading}}" disabled="{{btndisabled}}" bindtap="delmouthPics" class="btn_bottom"  hidden="{{checkboxdisabled}}">删除</button>
+
+
+<view class="picPup" hidden="{{pupHidden}}">
+    <swiper duration="{{duration}}" style="height:100%" bindchange="changeHandle" current="{{itemCurrent}}" bindtouchend="changeItem">
+        <block wx:for="{{swiperItems}}" wx:key="picId">
+            <swiper-item id="{{key}}">
+                <view class="picPup_picBox">
+                    <image src="{{basePath}}{{item.picUrl}}" mode="aspectFit"></image>
+                </view>
+                <view class="picPup_picTxt">
+                    <view class="title">{{item.title}}</view>
+                    <view>{{item.content}}</view>
+                    <view class="note"><text>{{item.address}}</text><text>{{item.picDateString}}</text></view>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+    <image src="{{imgPath}}/loading2.gif" class="imgLoading"></image>
+    <view class="closePup" bindtap="hidePup"><span class="iconfont icon-cuowu"></span></view>
+</view>
+

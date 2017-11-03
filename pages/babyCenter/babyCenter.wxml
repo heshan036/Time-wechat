@@ -1,0 +1,34 @@
+<!--pages/mybaby/mybaby.wxml-->
+<view class="header">
+    <view class="user">
+      <image src="{{imgPath}}/portrait_default.png" class="userPortrait" bindtap="uploadPortrait" wx:if="{{headUrl==''}}" mode="aspectFill"></image>
+      <image src="{{basePath}}{{headUrl}}" class="userPortrait" bindtap="uploadPortrait" wx:if="{{headUrl!=''}}" mode="aspectFill"></image>
+      <view class="userInfo">
+        <text class="userName">点击上传宝宝头像</text>
+      </view>
+    </view>
+</view>
+
+<form bindsubmit="formSubmit">
+<view class="content">
+    <view class="name"><text>昵称：</text><input name="nickname" placeholder="请输入宝宝昵称" bindblur="nicknameKey" bindinput="nicknameInput" value="{{nickname}}"/></view>    
+    <view class="choseList">
+        <picker mode="date" value="{{date}}" start="2000-01-01" end="{{curDate}}" bindchange="bindDateChange">
+            <view class="picker"><text>生日：</text><text class="select tr">{{date}}</text></view>
+        </picker>
+        <input value="{{date}}" name="birthday" disabled  style="display:none"/>
+    </view>
+    <view class="choseList">
+      <view class="picker"><text>与宝宝关系：</text><text class="tr">{{relation}}</text></view>
+    </view>
+    <view class="choseList">
+        <text>性别：</text>
+        <radio-group class="radio-group" bindchange="radioChange" name="gender">
+            <label class="radio" wx:for="{{items}}" wx:key="{{item.name}}">
+                <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+            </label>
+        </radio-group>
+    </view>
+    <button  loading="{{loading}}" disabled="{{btndisabled}}" class="btn_bottom"  formType="submit">保存</button>
+</view>
+</form>

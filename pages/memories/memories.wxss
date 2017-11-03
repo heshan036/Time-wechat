@@ -1,0 +1,13 @@
+/* pages/memories/memories.wxss */
+page{min-height: 100%}
+page::before{content: '';display: block;position: absolute;width: 1px;height: 100%;background: #52d2af;left: 64rpx;top: 0}
+.memories{margin: 0 32rpx}
+.memoryItem{margin-top: 16px;border-radius: 8px;width: 100%;height:358rpx;position: relative;background: #fff;overflow: hidden}
+.memoryItem > image{width: 100%}
+.memoryTag{position: absolute;top: 0;left: 0;right:0;bottom:0;color: #fff;background: rgba(0,0,0,0.1);text-align: center}
+.memoryTagcon{bottom: 16%;left: 5%;position: absolute;display: flex;align-items: center}
+.videoIcon{margin-right: 24rpx}
+.videoIcon span{font-size: 88rpx}
+.memoryTxt{text-align: left}
+.memoryTagcon .title{font-size: 36rpx;}
+image.default{margin: auto;height: 90%;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)}

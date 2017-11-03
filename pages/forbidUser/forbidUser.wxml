@@ -1,0 +1,9 @@
+<view class="content">
+    <view class="defaultCon" style="margin: 100px 60rpx 0;line-height:2">
+        <text>您的账号已违规被禁用，原因可能（不限）如下： </text>     
+        <text style="color:#232323">\n ·您的用户信息，发布信息有敏感词。</text>
+        <text style="color:#232323">\n·您发布了违规照片</text>
+        <text>\n如有疑问可致电客服了解！</text>   
+    </view>
+    <button bindtap="navBack" class="btn_bottom">返回</button>
+</view>

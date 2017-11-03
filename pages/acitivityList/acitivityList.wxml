@@ -1,0 +1,33 @@
+<view class="content" wx:if="{{actCount > 0}}" hidden="{{viewHidden}}">
+    <radio-group class="radio-group" bindchange="radioChange">
+        <block wx:for="{{actlist}}" wx:key="id">
+            <label>
+                <view class="activityItem">
+                    <radio value="{{item.id}}"/>
+                    <image src="{{basePath}}{{item.picUrl}}" wx:if="{{item.picUrl != ''}}" mode="aspectFill"></image>
+                    <image src="{{imgPath}}/picDefault.png"  wx:if="{{item.picUrl == ''}}" class="actdefaultImg" mode="aspectFill"></image>
+                    <view class="itemInfo">
+                        <text class="title">{{item.actName}}</text>
+                        <text class="address">\n{{item.address}}</text>
+                        <text class="time">\n{{item.actTimeStr}}</text>
+                        <text class="price">\n{{item.payMoney}}</text>
+                    </view>
+                </view>
+            </label>
+        </block>
+    </radio-group>
+    <import src="../template/bottomtpl.wxml"/>
+    <template is="msgItem" data="{{btnHeight}}"/>  
+    <button bindtap="publicAcitivityPics" class="btn_bottom"  data-id="publicActivity" disabled="{{btnDisabled}}">下一步</button>
+</view>
+
+<view class="content tc" wx:if="{{actCount == 0}}" hidden="{{viewHidden}}">
+    <view class="defaultCon">
+        <text>您未参加过妈妈蜜的活动</text>     
+        <text>\n赶紧扫描二维码</text>
+        <text class="color-red">“妈妈蜜宝宝家”</text>
+        <text>\n关注来免费参与活动！</text>   
+    </view>
+    <image src="{{imgPath}}/erweima.png" style="width:128px;height:128px;margin:20px auto" bindlongtap="scanerweima"></image>
+    <button bindtap="navBack" class="btn_bottom">返回</button>
+</view>

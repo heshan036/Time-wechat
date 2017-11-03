@@ -1,0 +1,4 @@
+<view class="defaultTxt">
+    <image src="{{imgPath}}/defaultImg.png"></image>
+    <view>暂无任何数据！</view>
+</view> 

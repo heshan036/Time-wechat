@@ -1,0 +1,79 @@
+<!--pages/mainIndex/mainIndex.wxml-->
+<view class="container">
+    <view class="header" style="background: #52d2af url('{{headerBg}}') center center no-repeat;background-size: cover;">
+        <view class="switchBaby" bindtap="toMorebaby"><span class="iconfont icon-gengduobaobao"></span></view>
+        <view class="switchBaby" bindtap="changeCover" style="left:auto;right:18rpx"><span class="iconfont icon-pifu"></span></view>
+        <view class="user">
+          <image src="{{headerBg}}" class="userPortrait" bindtap="toBabycenter"></image>
+          <view class="userInfo">
+            <text>我的宝宝</text>
+            <text class="smallFont">\n宝贝已陪伴您480天23小时</text>
+          </view>
+          <text class="inviteBtn" bindtap="toInviterelate">邀请亲属</text>
+        </view>
+        <view class="headerBottom"></view> 
+    </view>
+
+    <view class="navbar">
+      <view bindtap="toAlbum" style="background: url(/assets/imgs/nav_albumBg.png) center top no-repeat;background-size: 60% auto"><image src="/assets/imgs/nav_album.png" mode='aspectFit'></image><text>\n云相册</text></view>
+      <view bindtap="topMilestone" style="background: url(/assets/imgs/nav_stoneBg.png) center top no-repeat;background-size: 60% auto"><image src="/assets/imgs/nav_stone.png" mode='aspectFit'></image><text>\n里程碑</text></view>
+      <view bindtap="toMemories" style="background: url(/assets/imgs/nav_memoryBg.png) center top no-repeat;background-size: 60% auto"><image src="/assets/imgs/nav_memory.png" mode='aspectFit'></image><text>\n回忆故事</text></view>
+      <!--<view bindtap="toMemories"><span class="iconfont icon-camera"></span><text>\n邀请家属</text></view>-->
+    </view>
+
+    <view class="timeline">
+      <block wx:for="{{timeList}}" wx:key="*title" wx:for-item="item" wx:for-index="index">
+        <view class="timeItem" data-idx="{{index}}">
+            <view class="itemHeader" bindtap="toDetail" data-id="{{item.id}}">
+              <view class="itemTime">
+                <text class="date">{{item.year}} · {{item.date}}</text><text class="age">{{item.age}}</text>
+              </view>
+              <view class="itemTitle">
+                  <text class="h3">{{item.title}}</text>
+              </view>
+              <view class="itemInfo">{{item.intro}}</view>
+            </view>
+            <view class="imgBox {{ItemLayout?'imgBox2':''}}" bindtap="toDetail" data-id="{{item.id}}">
+                <block wx:for="{{item.picList}}" wx:for-item="itemPic" wx:key="*url">
+                    <image  src="{{item.picFlag ? itemPic : '/assets/imgs/default.png'}}" mode="aspectFill" class="fade_in"></image>
+                </block>  
+            </view>
+            <view class="itemFooter">
+                <text class="pr">{{item.person}}于{{item.time}}发布</text>
+                <view bindtap="itempupToggle" data-idx="{{index}}">
+                  <view class="pupswitch"><span class="iconfont icon-gengduo"></span></view>
+                  <view class="itemPup" hidden="{{item.itempupHidden}}">
+                    <text bindtap="delItem">删除</text><text bindtap="editItem">编辑</text>
+                  </view>
+                </view>
+            </view>
+        </view>
+      </block>
+      <view class="timeItem defaultTxt" wx:if="{{timeList.length == 0}}">
+          <image src="/assets/imgs/default_noTime.png" mode="aspectFit"></image>
+          <text class="color-green default_txtgreen">未发布过宝宝记录，赶紧发布宝宝成长时光吧！</text>
+      </view>
+
+      <view class="timeItem defaultTxt" wx:if="{{timeList.length == 0}}">
+          <image src="/assets/imgs/default_loadFail.png" mode="aspectFit"></image>
+          <text class="color-green default_txtgreen">你访问的页面开小差了，请下拉刷新一下吧！</text>
+      </view>
+
+    </view> 
+
+</view>
+
+<view class="publicIcons">
+  <view class="camera" bindtap="publicTime"><span class="iconfont icon-camera"></span></view>
+</view>
+<view class="publicbtnWrapper" hidden="{{publicHidden}}">
+    <view class="close" bindtap="publicTime" animation="{{pubcloseAnimation}}"><span class="iconfont icon-cuowu"></span></view>
+    <view class="publicbtnBox" animation="{{publicAnimation}}">
+      <view class="publicBtn" bindtap="upPhotos"><view><image src="/assets/imgs/public_photo.png" mode="aspectFit"></image></view><text>\n照片</text></view>
+      <view class="publicBtn" bindtap="upVideo"><view><image src="/assets/imgs/public_video.png" mode="aspectFit"></image></view><text>\n视频</text></view>
+      <view class="publicBtn" bindtap="topMilestone"><view><image src="/assets/imgs/public_stone.png" mode="aspectFit"></image></view><text>\n里程碑</text></view>
+      <view class="publicBtn" bindtap="topublicPics"><view><image src="/assets/imgs/public_time.png" mode="aspectFit"></image></view><text>\n成长时光</text></view>
+      <view class="publicBtn" bindtap="toActivity"><view><image src="/assets/imgs/public_activity.png" mode="aspectFit"></image></view><text>\n活动秀</text></view>
+    </view>
+    <view class="pupBg" animation="{{pubcloseAnimation}}" bindtap="publicTime"></view>
+</view>

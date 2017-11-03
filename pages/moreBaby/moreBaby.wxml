@@ -1,0 +1,32 @@
+<!--pages/moreBaby/moreBaby.wxml-->
+<view class="title">我家宝宝</view>
+<view class="myBaby">
+    <view class="babyBox">
+        <image src="http://img06.tooopen.com/images/20170313/tooopen_sy_201701533683.jpg" class="headImg"></image>
+        <view class="babyinfo">
+            <text class="h3">宝贝\n</text>
+            <text>1岁2个月\n</text>
+            <text>190条记录</text>
+        </view>
+        <view class="babyCreate">创建者</view>
+    </view>
+</view>
+
+<view class="title">亲属宝宝</view>
+<view class="linkBaby">
+    <block wx:for="{{linkBaby}}">
+        <view class="babyBox">
+          <image src="{{item.headImg}}" class="headImg"></image>
+          <view class="babyinfo">
+              <text class="h3">{{item.name}}\n</text>
+              <text>{{item.age}}\n</text>
+              <text>{{item.record}}条记录</text>
+          </view>
+      </view>
+    </block>
+</view>
+
+<view class="btn_bottom">
+    <view class="addIcon"><span class="iconfont icon-tianjiabaobao"></span></view>
+    <text>添加宝宝</text>
+</view>

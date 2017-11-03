@@ -1,0 +1,30 @@
+<!--pages/inviteInfo/inviteInfo.wxml-->
+<view class="container">
+  <view class="relateIntro">
+    <view bindtap="">
+      <image src="/assets/imgs/user_default.png" class="headImg"></image>
+      <text>{{name}}</text>
+    </view>
+    <view><span class="iconfont icon-arrowright"></span></view>
+  </view>
+  <view class="relateInfo">
+    <picker bindchange="bindAuthorityChange" value="{{defaultIndex}}" range="{{authorityArray}}">
+      <view class="infoItem">
+        <view class="label">监护者<text class="smallFont">（监护者可以发布宝宝成长信息）</text></view>
+        <view class="note">
+          <text>{{authorityArray[defaultIndex]}}</text>
+          <span class="iconfont icon-arrowright"></span>
+        </view>
+      </view>
+    </picker>
+    <view class="infoItem">
+      <view class="label">宝宝关系</view>
+      <view class="note">
+        <text>{{role}}</text>
+        <span class="iconfont icon-arrowright"></span>
+      </view>
+    </view>
+  </view>
+</view>
+
+<button bindtap="navBack" class="btn_bottom">解除宝宝关系</button>

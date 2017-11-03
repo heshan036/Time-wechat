@@ -1,0 +1,5 @@
+<template name="msgItem" data="{{btnHeight}}">
+    <view class="comBottom" style="margin-bottom:{{btnHeight}}px">
+        <image src="https://develop.mmmee.cn/LingMeng/resources/timeimg/bottomBg.png"></image>
+    </view>
+</template>

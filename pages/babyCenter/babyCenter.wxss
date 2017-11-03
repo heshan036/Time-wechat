@@ -1,0 +1,20 @@
+/**header**/
+.header{background-color: #ffffff; text-align: center;position: relative;height: 150px;}
+.header .user{display: flex;flex-direction: column;text-align: center;color: #fff;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%)}
+.header .userPortrait{width: 56px;height: 56px;border:4rpx solid #32c49d;border-radius:100%;margin:auto;margin-bottom:5px}
+.userInfo{font-size: 27rpx;line-height: 1.8}
+.userName{display: block; color: #616161;}
+
+/*content*/
+.content{margin-top: 10px; background-color: #fff; }
+.name{height: 44px; line-height: 44px; border-bottom:1px solid #ececec;padding: 0 36rpx }
+.name text{flex: 1;color: #333;}
+.name input{text-align: right; height: 43px; line-height: 43px;font-size: 27rpx;flex: 1}
+.choseList{height: 44px; line-height: 44px; border-bottom:1px solid #ececec; position: relative;padding: 0 36rpx}
+.picker,.name{display: flex;flex-direction:row; align-items: center; font-size:27rpx;justify-content: space-between}
+.picker input{ font-size: 27rpx;text-align: right;color: #333;flex: 1;padding-right: 12px;position: relative}
+.choseList text,.picker text{flex: 1}
+.choseList .radio-group{flex-direction: column; align-items: center; position: absolute;right: 36rpx; top: 0;  display: inline-block;}
+.radio{padding: 0 10px;height:100%;display: inline-block;}
+
+.choseList input:after{content: "";display: block;position: absolute;right: 0;bottom: 50%;width: 8px;height: 16px;background:url('https://develop.mmmee.cn/LingMeng/resources/timeimg/right_arrow.png') center 100% no-repeat;background-size: 8px 16px;transform: translateY(50%)}
