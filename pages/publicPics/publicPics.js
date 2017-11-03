@@ -10,20 +10,12 @@ Page({
         takePlace:"不显示",
         date:[],
         curDate:[],
-        visiblePicker: ['仅自己可见', '所有人可见','仅亲属可见'],
-        isVisible:'所有人可见',
-        stonesPicker: ['出生时的小脚丫', '第一次笑', '第一次哭','宝宝满月','无'],
-        takeStone: '无',
-        stonesDisabled:false,
         loading:false,
         btndisabled:true,
         theme:'',
-        upTypeFlag:'0',
         forminfotxt:'',
         themeDisabled:false,
         imgsPath:[],
-        videoPath:'',
-        videoCtr:false,
         infoDisabled:false,
         infotxtNum:140,
         placeLatitude:0,
@@ -36,65 +28,33 @@ Page({
     },
     onLoad:function(options){
         var date=util.formatTime(new Date()); 
-        var page=this;
-        var upTypeFlag = options.upTypeFlag
+        var page=this;  
         this.setData({
             date: date,
             curDate:date,
-            upTypeFlag:upTypeFlag
         })
         console.log(options)
         //如果从活动列表页进入
-        if (options.actName){
+        if(options.actName){
             actId=options.actId;
             page.setData({
                 themeDisabled:true,
                 theme:options.actName
             })
         }
-        //如果从里程碑页进入
-        if (options.stoneTitle){
-          page.setData({
-             stonesDisabled: true,
-              takeStone: options.stoneTitle
-          })
-        }
         //如果从首页点击发布成长时光后进入
-        if (upTypeFlag == '0' || upTypeFlag == '3'){
+        if(options.imgsPath){
             var imgsPath=options.imgsPath;
             var arr=imgsPath.split(",");
             page.setData({
                 imgsPath:arr
             })
-        } else if (upTypeFlag == '1'){
-          page.setData({
-            videoPath: options.videoPath
-          })
         }
-
-        wx.setNavigationBarTitle({
-          title: '时光记录'
-        })
     },
     bindDateChange:function(e){
         this.setData({
             date: e.detail.value
         })
-    },
-    bindStoneChange:function(e) {
-      var ind = e.detail.value;
-      var stonesPicker = this.data.stonesPicker
-      console.log(stonesPicker[ind])
-      this.setData({
-        takeStone: stonesPicker[ind]
-      })
-    },
-    bindvisibleChange: function (e) {
-      var ind = e.detail.value;
-      var visiblePicker = this.data.visiblePicker
-      this.setData({
-        isVisible: visiblePicker[ind]
-      })
     },
     // 选择发生地点
     chosePlace:function(e){
@@ -166,14 +126,6 @@ Page({
                 btndisabled:true
             })
         }
-        e.stopPropagation()
-    },
-    delvideo:function(){
-        var page=this;
-        page.setData({
-          videoPath:'',
-          upTypeFlag:'0'
-        })
     },
     // 更改主题
     changeName:function(e){
@@ -211,6 +163,59 @@ Page({
         if(forminfotxt.length > 140){
              page.setData({
                 infoDisabled:true
+            })
+        }
+    },
+    // 标题敏感词汇检测
+    themKey:function(e){
+        var key=e.detail.value;
+        var state=0;
+        themestatus=util.forbiddenStr(key,state);
+        console.log(themestatus);
+        if(infostatus == 1){
+            wx.showModal({
+                title: '提示',
+                content: '不能包含敏感词',
+                showCancel:true,
+                cancelColor:'#a0a0a0',
+                confirmColor:'#52d2af',
+                success: function(res) {
+                    if (res.confirm) {
+                        page.setData({
+                            btndisabled:true,
+                            theme:''
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+        }
+    },
+    // 内容敏感词汇检测
+    infoKey:function(e){
+        var page=this
+        var key=e.detail.value;
+        var state=0;
+        infostatus=util.forbiddenStr(key,state);
+        console.log(infostatus);
+        if(infostatus == 1){
+            wx.showModal({
+                title: '提示',
+                content: '不能包含敏感词',
+                showCancel:true,
+                cancelColor:'#a0a0a0',
+                confirmColor:'#52d2af',
+                success: function(res) {
+                    if (res.confirm) {
+                        page.setData({
+                            btndisabled:true,
+                            forminfotxt:''
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
             })
         }
     },

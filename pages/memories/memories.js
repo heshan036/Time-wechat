@@ -18,17 +18,14 @@ Page({
     ]
   },
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '回忆故事'
-    })
+  
   },
   onReady: function () {
   
   },
   toPlayimgs:function(e){
-    var category = e.currentTarget.dataset.category
     wx.navigateTo({
-      url: '../playImgs/playImgs?category=' + category,
+      url: '',
     })
   }
 })

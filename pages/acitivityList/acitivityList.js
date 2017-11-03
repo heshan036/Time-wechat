@@ -128,14 +128,13 @@ Page({
         var choseId=this.data.choseId;
         var list=this.data.actlist;
         var actName='';
-        var upTypeFlag='4'
         for(var i=0;i<list.length;i++){
             if(list[i].id==choseId){
                 actName=list[i].actName
             }
         }
          wx.navigateTo({
-           url: '../publicPics/publicPics?actId=' + choseId + '&actName=' + actName + '&upTypeFlag=' + upTypeFlag,
+            url: '../publicPics/publicPics?actId='+ choseId+'&actName='+actName,
         })
     },
     navBack:function(e){

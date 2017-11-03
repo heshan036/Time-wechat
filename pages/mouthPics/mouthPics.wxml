@@ -7,11 +7,11 @@
                 <view class="dayItem_title">{{item.showDay}}</view>
                    <view class="dayItem_pics">
                         <block wx:for="{{item.picList}}" wx:for-item="itemPic" wx:key="id}">
-                          <label class="checkbox" bindtap="{{checkboxdisabled?'showPup':''}}" value="{{itemPic.id}}" data-id="{{itemPic.id}}">
-                              <checkbox value="{{itemPic.id}}" checked="{{itemchecked}}" disabled="{{checkboxdisabled}}" hidden="{{checkboxdisabled}}"/>
-                              <image src="{{basePath}}{{itemPic.thumbUrl}}" data-id="{{itemPic.id}}"  mode="aspectFill"></image>
-                              <!--<text class="choose"></text>-->
-                          </label>
+                        <label class="checkbox" bindtap="{{checkboxdisabled?'showPup':''}}" value="{{itemPic.id}}" data-id="{{itemPic.id}}">
+                            <checkbox value="{{itemPic.id}}" checked="{{itemchecked}}" disabled="{{checkboxdisabled}}" hidden="{{checkboxdisabled}}"/>
+                            <image src="{{basePath}}{{itemPic.thumbUrl}}" data-id="{{itemPic.id}}"  mode="aspectFill"></image>
+                            <!--<text class="choose"></text>-->
+                        </label>
                          </block>
                     </view>  
             </view>

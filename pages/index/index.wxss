@@ -1,55 +1,38 @@
-/* header*/
-.header{text-align: center;position: relative;height: 248px;width: 100%;margin-bottom: 16px}
-.header::before{content: '';display: block;position: absolute;top: 0;left: 0;bottom: 0;right: 0;background: rgba(0,0,0,0.15);z-index: 1}
+/**header**/
+.header{background: #52d2af url('https://develop.mmmee.cn/LingMeng/resources/timeimg/wavesBg.png') bottom center no-repeat;text-align: center;position: relative;height: 164px;background-size: 100% auto;}
 .headerBg{position: absolute;top: 0;width: 76px;height:46px;z-index: 1}
-.header .user{display: flex;flex-direction: row;color: #fff;position: absolute;left: 36rpx;right:36rpx;bottom: 27px;align-items: center;z-index: 2}
-.header .user::after{content: '';display: block;position: absolute;width: 1px;height:45px;z-index: 12;background: #fff;left:30px;top:60px;}
-.headerBottom{position: absolute;z-index:1;left:0;bottom:0;width: 100%;height: 27px;background: url(/assets/imgs/headerBg.png) center center no-repeat;background-size: 100% 100%;}  
-.header .userPortrait{width: 56px;height: 56px;border:2px solid #fff;border-radius:28px;background: #fff}
-.userInfo{font-size: 34rpx;line-height: 1.5;margin-left: 8px;text-align: left}
-.userInfo .smallFont{padding-top: 10px}
-.inviteBtn{font-size: 28rpx;background: rgba(0,0,0,0.24);padding: 0 10px;color: #fff;height:27px;line-height: 27px;border-radius: 14px;right: 0;position: absolute}
-.switchBaby{position: absolute;left: 18rpx;top: 16px;color: #fff;border: 1px solid #fff;width:32px;height: 32px;line-height:32px;border-radius: 16px;z-index: 2;background: rgba(255,255,255,0.15)}
-.switchBaby span{font-size: 20px}
+.headerBg1{left:14%;}
+.headerBg2{right:14%;transform:scaleX(-1)}
+.header .user{display: flex;flex-direction: column;text-align: center;color: #fff;position: absolute;left: 50%;top: 40%;transform: translate(-50%,-50%)}
+.header .userPortrait{width: 56px;height: 56px;border:4rpx solid #32c49d;border-radius:28px;margin:auto;margin-bottom:5px;background: #fff}
+.userInfo{font-size: 36rpx;line-height: 1.2}
+.userName{display: block}
+.userAge{position: relative;font-size: 30rpx;}
+.userAge::before ,.userAge::after{content: "";display: block;top:50%;height:1px;width: 72rpx;position: absolute;z-index: 9;background: #fff}
+.userAge::after{left:110%;}
+.userAge::before{right:110%}
+.switchBaby{position: absolute;left: 18rpx;top: 16px;color: #fff;border: 1px solid #fff;height: 24px;border-radius: 12px;padding: 0 10px;line-height: 24px;z-index: 2}
 
-.navbar{display: flex;flex-direction: row;align-items: center;padding:10px 20rpx;background: #fff;border-radius: 8px;margin:0px 16rpx;width: calc(100% - 32rpx);box-sizing: border-box}
-.navbar > view{flex: 1;text-align: center;padding-top:20px;}
-.navbar image{width: 50%;height: 44rpx;padding-bottom: 5px}
+/*content*/
+.timelist{margin: 0 36rpx;position: relative;width: auto}
+.timelist .title{font-weight: bold;position: relative;font-size: 32rpx;margin-top:30px;margin-bottom: 20px}
+.timelist .title span{color: #52d2af;margin-right: 5px;vertical-align: sup}
+.timelist .title image{width: 24px;height: 24px;margin-right: 5px;vertical-align:sub;line-height: 0}
+.timelist .title::before{content: "";display: block;width:1px;height: 24px;background:#52d2af;bottom:100%;left:12px;z-index: 8;position: absolute}
+.mouthSec{margin-bottom: 24px;}
+.timelist .title.yearNew{margin-top: 0}
+.mouthCon{border-radius: 24rpx;overflow: hidden}
+.mouthTitle{background: #52d2af;height: 36px;line-height: 36px;padding: 24rpx;display: flex;flex-direction: row;justify-content: space-between;align-items: center;color: #fff;font-size: 30rpx}
+.mouthTitle .mouthNum{font-weight: bold;font-size: 32rpx;}
+.more{font-size: 27rpx}
+.mouthPics{background: #fff;padding: 24rpx 0 24rpx 3.33%;display: flex;flex-direction: row;}
+.mouthPics image{margin-right:3.33%;height: 188rpx;border-radius: 24rpx;width: 30%}
 
-.timeline{display: flex;flex-direction: column;margin-top: 16px;position: relative}
-.timeline::before{content: '';display: block;position: absolute;left: 32rpx;top: 10px;width: 1px;height: 100%;background:#52d2af;z-index: 1 }
-.timeItem{position: relative;padding: 10px 0;background: #fff;margin:0 16rpx 16px;border-radius: 8px;}
-.timeItem .imgBox{display: flex;flex-direction: row;flex-wrap: wrap}
-.timeItem .imgBox image{margin-right: 2%;width:49%;height: 148px;margin-bottom: 16rpx;position: relative;z-index: 10}
-.timeItem .imgBox image:last-child,.timeItem .imgBox image:nth-child(2){margin-right: 0}
-.timeItem .imgBox.imgBox2 image:last-child{width: 100%}
-.itemHeader{position: relative;}
-.itemTime{padding: 0 36rpx;display: flex;flex-direction: row;justify-content: space-between;align-items: center;position: relative}
-.itemTime .date{position: absolute;left:-52rpx;text-indent:36rpx;background: #52d2af;height: 24px;line-height: 24px;padding: 0 8px;border-bottom-right-radius: 12px;border-top-right-radius: 12px;color: #fff;z-index: 8;}
-.itemTime .age{flex: 1;text-align: right;color:#52d2af}
-.itemTitle{position: relative;margin-top: 16px;padding: 0 36rpx;}
-.itemTitle .h3{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: block}
-.itemTitle::before,.itemFooter::before{content: '';display: block;position: absolute;background: #52d2af;height: 12rpx;width: 12rpx;border-radius: 50%;z-index: 9;left: 12rpx;top: 50%;margin-top:-5rpx }
-.itemInfo{padding: 0 36rpx;margin: 8px 0;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
-.itemFooter{display: flex;flex-direction: row;justify-content: space-between;position: relative;align-items: center;padding:0 36rpx;}
-.itemFooter view{position: relative}
-.pupswitch span{font-size: 10rpx;color: #52d2af}
-.itemFooter .itemPup{position: absolute;right: 200%;top: 0;width: 204rpx;background: rgba(0,0,0,0.6);border-radius: 3px;padding:5px 8px;}
-.itemFooter .itemPup::before{position: absolute;left: 100%;border:5px solid transparent;border-left-color: rgba(0,0,0,0.6);content: "";display: block;top:50%;transform: translateY(-50%)}
-.itemFooter .itemPup text{flex: 1;text-align: center;color: #fff;width: 50%;display: inline-block}
-
-.publicIcons{position: fixed;right: 36rpx;bottom:40px;z-index: 10}
+.publicIcons{position: fixed;right: 36rpx;bottom: 20px;z-index: 10}
 .public_btn1 , .public_btn2 ,.camera{color: #fff;text-align: center;box-shadow: 0px 1px 4px rgba(0,0,0,0.26);z-index: 12}
 .camera{background: rgba(46,204,113,0.9);width: 56px;height: 56px;border-radius: 28px;}
 .camera .iconfont{font-size: 32px;line-height: 1.6}
-.pupBg{position: absolute;width: 100%;height: 100%;top: 0;left: 0;background: rgba(0,0,0,0.6);z-index: 1;opacity: 0}
-.publicbtnWrapper{position: fixed;bottom:0;left:0;right:0;top:0;box-sizing: border-box;z-index: 101;}
-.publicbtnBox{height:auto;position:absolute;display: flex;flex-wrap: wrap;flex-direction: row;background: #ececec;border-top-left-radius: 16px;border-top-right-radius: 16px;bottom:-334px;left:0;right:0;z-index: 10;padding: 24px 0;}
-.publicbtnBox .publicBtn{width: 33.3%;text-align: center;margin: 16px 0;position:relative}
-.publicbtnBox .publicBtn:first-child::before,.publicbtnBox .publicBtn:nth-child(3n+1)::before{position: absolute;left: -5px;top: 16px;content: '';display: block;background:#52d2af;height: 32px;width:10px;border-radius: 4px;}
-.publicBtn > text{font-size: 30rpx;color: #333;line-height: 2.4}
-.publicBtn > view{position:relative;background: #fff;text-align: center;width: 64px;height: 64px;border-radius: 32px;line-height: 64px;display: inline-block}
-.publicBtn image{width: 60rpx;max-height: 60rpx;position: absolute;top: 50%;left:50%;transform: translate(-50%,-50%)}
-.publicbtnWrapper .close{position: absolute;color: #fff;bottom:364px;right: 36rpx;width: 36px;height: 36px;text-align: center;line-height: 36px;border:1px solid #fff;border-radius: 18px;z-index: 9;opacity: 0}
-.publicbtnWrapper .close span{font-size: 64rpx;line-height: 1}
-.publicbtnWrapper .close::before{content: '';display: block;width: 1px;height:68px;z-index: -1;background: #fff;right: 18px;top:100%;position: absolute }
+.public_btn1 ,.public_btn2{position: absolute;color: #fff;width: 46px;height: 46px;border-radius: 23px;font-size: 24rpx;transform: scale(0)}
+.public_btn1{background: rgba(78,196,164,0.9);bottom:68%;right:110%;z-index: 9;line-height: 1.2;box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-o-box-sizing: border-box;padding-top:8px}
+.public_btn2{background: rgba(0,160,233,0.9);bottom:120%;z-index: 9;line-height: 46px}
+.pupBg{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: rgba(0,0,0,0.6);z-index: 9}

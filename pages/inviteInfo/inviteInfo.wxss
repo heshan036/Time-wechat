@@ -1,9 +1,0 @@
-/* pages/inviteInfo/inviteInfo.wxss */
-.relateIntro{display: flex;justify-content: space-between;align-items: center;padding: 8px 36rpx;background: #fff;width: 100%;box-sizing: border-box}
-.relateIntro image{vertical-align: middle;margin-right:8px}
-.relateIntro text{color: #333;font-size: 32rpx;max-width: 375rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis}
-.relateInfo{background: #fff;margin-top: 16px;width: 100%}
-.infoItem{padding: 10px 36rpx;width:100%;box-sizing:border-box;display: flex;justify-content: space-between;align-items: center;border-bottom: 1px solid #fbfbfb;position: relative;}
-.infoItem .label{font-size: 32rpx;}
-.infoItem .note{font-size: 32rpx;color: #333;}
-.infoItem .note span{margin-left: 5px}

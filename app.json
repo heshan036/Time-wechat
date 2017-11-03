@@ -1,27 +1,22 @@
 {
   "pages":[  
-    "pages/index/index",
+    "pages/mainIndex/mainIndex",
     "pages/detail/detail",
-    "pages/milestone/milestone",
     "pages/memories/memories",
     "pages/playImgs/playImgs",
-    "pages/album/album",
+    "pages/index/index",
     "pages/publicPics/publicPics",
     "pages/mouthPics/mouthPics",
     "pages/acitivityList/acitivityList",
     "pages/babyCenter/babyCenter",
-    "pages/moreBaby/moreBaby",
-    "pages/inviteRelate/inviteRelate",
-    "pages/inviteDefault/inviteDefault",
-    "pages/inviteInfo/inviteInfo",
     "pages/forbidUser/forbidUser",
-    "pages/noAuthorize/noAuthorize"
+    "pages/noAuthorize/noAuthorize",
+    "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#4ec4a4",
     "navigationBarTitleText": "时光·妈妈蜜",
-    "navigationBarTextStyle":"white",
-    "enablePullDownRefresh":true
+    "navigationBarTextStyle":"white"
   }
 }

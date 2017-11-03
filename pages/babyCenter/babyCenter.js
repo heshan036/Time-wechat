@@ -111,7 +111,6 @@ Page({
         imgPath:app.globalData.imgPath,
         headUrl:'',
         nickname:'',
-        relation:'妈妈',
         items: [
             {name: '10', value: '男', checked: 'true'},
             {name: '11', value: '女'}
@@ -133,11 +132,7 @@ Page({
             } 
             catch (e) {
             }
-        })   
-
-        wx.setNavigationBarTitle({
-          title: '宝贝'
-        }) 
+        })    
     },
     bindDateChange:function(e){
         this.setData({

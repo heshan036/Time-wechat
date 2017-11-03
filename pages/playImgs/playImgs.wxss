@@ -1,17 +1,3 @@
 /* pages/playImgs/playImgs.wxss */
-page{height: 100%}
 .container{position: relative;height: 100%}
-.playWrapper{position: relative;height: 80%;width: 100%;background: #fff;z-index: 2}
-.playMask{position: absolute;z-index: 2;left: 0;right: 0;bottom: 0;top:0;}
-.playMask image{width: 100%;height: 92%;margin-top: 4%}
-.playBox{position: absolute;z-index: 0;height: auto}
-.playBox_0{top: 64rpx;left: 84rpx;right: 84rpx;bottom: 86rpx;}
-.playBox_1{top:66rpx;left:76rpx;right:84rpx;bottom:84rpx;}
-.playBox_2{top: 86rpx;left: 76rpx;right: 116rpx;bottom: 76rpx;}
-.playBox image{width: 100%;height: 100%}
-.imgmMask{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.24);color: #fff}
-.imgmMask text{position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);text-align: center}
-.control{position: absolute;z-index: 0;bottom:6%;left:10%;right:36rpx;display: flex;flex-direction: row;align-items: center;color:#52d2af;}
-.control .iconfont{font-size: 44px;color:#52d2af;position: relative}
-.control .iconfont::after{content: '';display: block;position: absolute;width: 1px;height: 100px;background:#52d2af;bottom: 100%;z-index: -1;left: 22px}
-.control text{font-size: 32rpx;margin-left: 8px}
+.playBox{position: absolute}

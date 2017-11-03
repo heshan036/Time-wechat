@@ -1,0 +1,48 @@
+<!--pages/mainIndex/mainIndex.wxml-->
+<view class="header">
+    <view class="switchBaby" bindtap="switchBaby" hidden="{{switchBabyDisabled}}">我家宝贝</view>
+    <view class="user">
+      <image src="{{imgPath}}/portrait_default.png" class="userPortrait" bindtap="{{updateFlag==11?'editPortrait':''}}" mode="aspectFill"></image>
+      <view class="userInfo">我的宝宝</view>
+    </view>
+    <text class="userAge" wx:if="{{babyInfo.age==null}}">宝贝已陪伴您\n <text class="fb">480天23小时56分</text></text>
+</view>
+
+<view class="navbar">
+  <view><span class="iconfont icon-camera"></span><text>\n云相册</text></view>
+  <view><span class="iconfont icon-camera"></span><text>\n里程碑</text></view>
+  <view bindtap="toMemories"><span class="iconfont icon-camera"></span><text>\n回忆故事</text></view>
+  <view class="inviteEnter"><span class="iconfont icon-camera"></span><text>\n邀请家属</text></view>
+</view>
+
+<view class="timeline">
+  <view class="timeItem">
+      <view class="itemHeader">
+        <view class="itemTitle">
+            <text class="h3">回忆故事</text><text class="time">5岁8个月</text>
+        </view>
+        <view class="itemInfo">接受一个数组，每一项都是字符串，来指定小程序由哪些页面组成。每一项代表对应页面的【路径+文件名】信息</view>
+      </view>
+      <view class="imgBox {{ItemLayout?'imgBox2':''}}" bindtap="toDetail">
+          <block wx:for="{{picList}}" wx:for-item="itemPic" wx:key="id">
+              <image src="{{itemPic}}" mode="aspectFill"></image>
+          </block>  
+      </view>
+      <view class="itemFooter">
+          <text>粑粑于18:32发布</text>
+          <view>
+            <text bindtap="itempupToggle">...</text>
+            <view class="itemPup" animation="{{itempupAnimation}}">
+              <text bindtap="delItem">删除</text><text bindtap="editItem">编辑</text>
+            </view>
+          </view>
+      </view>
+  </view>
+</view>
+
+<view class="publicIcons">
+  <view class="camera" bindtap="{{publichidden?'showbtns':'hidebtns'}}"><span class="iconfont icon-camera"></span></view>
+  <text class="public_btn1" bindtap="showPublic" data-id="publicGrowth" animation="{{publicAnimation}}">成长\n时光</text>
+  <text class="public_btn2"  bindtap="showActivity" data-id="publicActivity" animation="{{publicAnimation}}">活动秀</text>
+</view>
+<view class="pupBg" hidden="{{publichidden}}" bindtap="{{publichidden?'showbtns':'hidebtns'}}"></view>

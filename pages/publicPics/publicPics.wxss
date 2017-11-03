@@ -5,10 +5,10 @@ page{min-height:auto}
 .infotxtNum{position: absolute;right:36rpx;bottom:5px;font-size: 22rpx;color: #a0a0a0}
 textarea.infotxt{font-size: 27rpx;width: 100%;height:96px;color: #333}
 .pics{background: #fff;padding: 15px 36rpx 0;display: flex;flex-direction: row;flex-wrap: wrap;margin-top: 10px;}
-.pics view,.pics image,.video{width: 64px;height: 64px;border-radius: 5px;margin-right: 36rpx;position: relative;overflow: visible;margin-bottom: 15px}
+.pics view,.pics image{width: 64px;height: 64px;border-radius: 5px;margin-right: 36rpx;position: relative;overflow: visible;margin-bottom: 15px}
 .pics view{text-align: center;background: #52d2af;line-height: 64px;color: #a9e9d7}
 .pics span.iconfont{font-size: 27px}
-.pics image::before,.video::before{content:"×";display: block;background: #4ec4a4;width: 20px;height: 20px;border-radius: 12px;position: absolute;z-index: 9;top:-10px;right: -10px;font-size: 18px;text-align: center;line-height: 18px;color: #fff}
+.pics image:before{content:"×";display: block;background: #4ec4a4;width: 20px;height: 20px;border-radius: 12px;position: absolute;z-index: 9;top:-10px;right: -10px;font-size: 18px;text-align: center;line-height: 18px;color: #fff}
 .choseList{background: #fff;margin-top: 10px;font-size: 34rpx}
 .choseList .recordTime , .choseList .takePlace{display: flex;flex-direction: row;justify-content: space-between;height: 48px;line-height: 48px;padding: 0 36rpx;position: relative;border-bottom:1px solid #ececec;font-size: 13px}
 /*.choseList .recordTime picker{position: absolute;width: 100%;height: 100%;left:0;top:0;z-index: 9}*/

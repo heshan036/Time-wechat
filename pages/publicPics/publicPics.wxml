@@ -1,28 +1,22 @@
 <view class="content">
     <form class="publicCon" bindsubmit="formSubmit">
-        <input type="text" value="{{theme}}" placeholder="成长时光主题" name="theme" class="borderBox theme" placeholder-class="placeholder" disabled="{{themeDisabled}}" bindinput="changeName" wx:if="{{upTypeFlag != '0'&&upTypeFlag!='1'}}"/>
-        <view class="infotxtBox" wx:if="{{upTypeFlag != '0'&&upTypeFlag!='1'}}">
+        <input type="text" value="{{theme}}" placeholder="成长时光主题" name="theme" class="borderBox theme" placeholder-class="placeholder" disabled="{{themeDisabled}}" bindinput="changeName" bindblur="themKey" bindblur="themeKey"/>
+        <view class="infotxtBox">
              <textarea placeholder="快点来记录宝宝成长历程..." name="infotxt" placeholder-class="placeholder" class="borderBox infotxt" bindinput="changeInfotxt" disabled="{{infoDisabled}}" bindblur="infoKey" value="{{forminfotxt}}"/>
              <view class="infotxtNum"><text>{{infotxtNum}} </text><text>/ 140字以内</text></view>
         </view>
         
         <view class="pics">
-            <view class="addpics" bindtap="addPics"  wx:if="{{upTypeFlag!='1'}}"><span class="iconfont icon-add"></span></view>
-            <block wx:for="{{imgsPath}}" wx:key="picUrl" wx:if="{{upTypeFlag != '1'}}">
+            <view class="addpics" bindtap="addPics"><span class="iconfont icon-add"></span></view>
+            <block wx:for="{{imgsPath}}" wx:key="picUrl">
                 <image src="{{item}}" mode="aspectFit" bindtap="delImg" data-id="{{index}}"></image>
             </block>
-             <video src="{{videoPath}}"  controls="{{videoCtr}}" bindtap="delvideo" wx:if="{{upTypeFlag == '1'}}" poster="{{posterUrl}}" class="video" objectFit='fill'></video>
         </view>
-
-        <view class="choseList"  wx:if="{{upTypeFlag != '0'&&upTypeFlag!='1'}}">
+        <view class="choseList">
             <picker mode="date" value="{{date}}" start="1999-01-01" end="{{curDate}}" bindchange="bindDateChange" ><view class="recordTime"><text>记录时间</text><text class="select tr">{{date}}</text></view></picker>    
             <input value="{{date}}" name="recordTime" disabled style="display:none"/>     
             <view class="takePlace"  bindtap="chosePlace"><text>发生地点</text><text class="select tr">{{takePlace}}</text></view>
             <input value="{{takePlace}}" name="takePlace" disabled style="display:none"/>
-            <picker mode="selector" range="{{stonesPicker}}" value="{{takeStone}}" bindchange="bindStoneChange" disabled="{{stonesDisabled}}"><view class="recordTime"><text>里程碑</text><text class="select tr">{{takeStone}}</text></view></picker>    
-            <input value="{{takeStone}}" name="takeStone" disabled style="display:none"/>
-            <picker mode="selector" range="{{visiblePicker}}" value="{{isVisible}}" bindchange="bindvisibleChange" ><view class="recordTime"><text>是否可见</text><text class="select tr">{{isVisible}}</text></view></picker>    
-            <input value="{{isVisible}}" name="isVisible" disabled style="display:none"/>
         </view>
         <button loading="{{loading}}" disabled="{{btndisabled}}" class="btn_bottom"  formType="submit">发布</button>
     </form>

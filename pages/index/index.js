@@ -1,244 +1,406 @@
-// pages/mainIndex/mainIndex.js
+//index.js
+//获取应用实例
 var util = require('../../utils/util.js');
 var app = getApp();
-var basePath = app.globalData.basePath;
-function GetList(page){
- 
-}
-Page({
-  data: {
-    scrollHeight:0,
-    publicHidden: true,
-    publicAnimation: {},
-    pubcloseAnimation:{},
-    ItemLayout:true,
-    headerBg:'http://img06.tooopen.com/images/20170313/tooopen_sy_201701533683.jpg',
-    timeList:[
-      {
-        id:'time1',
-        title:'橘子洲一日游',
-        year:'17',
-        date:'07-01',
-        time:'18:25',
-        age: '4岁5个月',
-        intro: '适用于微信小程序的图片预加载组件，已应用于京东购物小程序版。使用步骤如下：',
-        person:'粑粑',
-        itempupHidden: true,
-        picFlag:true,
-        picList: ['../../assets/imgs/pic1.png', '../../assets/imgs/pic1.png', '../../assets/imgs/pic1.png'        ]
-      },{
-        id: 'time2',
-        title: '橘子洲一日游',
-        year: '17',
-        date: '07-01',
-        time: '18:25',
-        age: '4岁5个月',
-        intro: '适用于微信小程序的图片预加载组件，已应用于京东购物小程序版。使用步骤如下：',
-        person: '粑粑',
-        itempupHidden: true,
-        picFlag:false,
-        picList: ['../../assets/imgs/pic2.png']
-      }
-    ],
-  },
-  onLoad: function () {
-    // 这里要非常注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值
-    var page = this;
-    //获得窗口高度
-    wx.getSystemInfo({
-      success: function(res) {
-        page.setData({
-          scrollHeight: res.windowHeight
-        })
-      },
-    })
-  },
-  onShow: function () {
-    //在页面展示之后先获取一次数据
-    var page = this;
-    GetList(page);
-    //获取每个时光故事的offsetTop
-    const timeArray = page.data.timeList;
-    const query = wx.createSelectorQuery();
-    wx.createSelectorQuery().selectAll('.timeItem').boundingClientRect(function (rects) {
-      rects.forEach(function (rect) {
-        let idx = rect.dataset.idx;
-        timeArray[idx].offsetTop = rect.top;
-      })
-    }).exec()
-  },
-  onHide:function(){
-    // 页面关闭是关闭发布弹窗
-    this.setData({
-      publicHidden: false
-    })
-    this.publicTime()
-  },
-  loadList: function () {
-    //该方法绑定了页面滑动到底部的事件
-    var page = this;
-    GetList(page);
-  },
-  //下拉刷新
-  onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
-  },
-  //页面滑动事件
-  onPageScroll: function (e) {
-    var page=this;
-    var scrollTop = e.scrollTop;
-    var timeArray = page.data.timeList;
-    for (var i = 0; i < timeArray.length;i++){
-      let offsetTop = timeArray[i].offsetTop
-      if (offsetTop < scrollTop + page.data.scrollHeight){
-        timeArray[i].picFlag=true
-      }
-    }
-    page.setData({
-      timeList: timeArray
-    })
-  },
-  // 隐藏或显示发布弹窗
-  publicTime: function (e) {
-    var page = this;
-    var publicHidden = page.data.publicHidden;
-    if (publicHidden) { // 显示发布弹窗
-        page.setData({
-          publicHidden: false
-        })
-        var btnsAnimation = wx.createAnimation({
-          duration: 600,
-          timingFunction: 'ease',
-        })
-        var closeAnimation = wx.createAnimation({
-          delay: 400,
-          duration: 400,
-          timingFunction: 'linear',
-        })
-        btnsAnimation.bottom(0).step();
-        closeAnimation.opacity(1).step()  
-    } else {// 隐藏发布弹窗
-        var btnsAnimation = wx.createAnimation({
-          duration: 400,
-          delay: 200,
-          timingFunction: 'ease',
-        })
-        var closeAnimation = wx.createAnimation({
-          duration: 200,
-          timingFunction: 'linear',
-        })
-        btnsAnimation.bottom(-334).step()
-        closeAnimation.opacity(0).step()
-        setTimeout(function(){
+var basePath=app.globalData.basePath;
+var endMonth=0;
+var endYear=0;
+var timeCount=1;
+var timeCurcount=0;
+var showfinishFlag=true;//是否显示全部加载完成弹窗
+var shareId='';
+var userId='';
+var isShared='0';
+var loadmoreFlag=0;
+// 获取时光分页列表
+var getList=function(page,shareId,showToastFlag,wxBizKey){
+     var getlistNum=3;
+      wx.request({
+        url: basePath+'/appFree/wxbizTime/getTimeListByMap.do',
+        data: {
+          wxbizKey:wxBizKey,
+          shareId:shareId,
+          getNum:getlistNum,
+          beginInfoId:endMonth,
+          beginyear:endYear
+        },
+        method: 'GET', 
+        header: {
+          'content-type': 'application/json'
+        }, 
+        success: function(res){
+          console.log(res.data)
+          var List = page.data.timeList;
+          timeCount=res.data.timeCount;
+          if(showToastFlag == 0){
+            page.setData({
+              loadingFlag:false
+            })
+          }
+          if(res.data.timeList instanceof Array){
+              for(var i = 0; i < res.data.timeList.length; i++){
+                  for(var j=0;j<res.data.timeList[i].picList.length;j++){
+                      var thumbUrl=res.data.timeList[i].picList[j].thumbUrl.replace(/\\/g,'/');
+                      res.data.timeList[i].picList[j].thumbUrl=thumbUrl
+                  }                
+                  List.push(res.data.timeList[i]);
+                  endMonth=res.data.timeList[i].month
+                  endYear=res.data.timeList[i].year
+                  timeCurcount++
+              } 
+          } 
           page.setData({
-            publicHidden: true
+              timeList : List,
+              timeCount:timeCount
           })
-        },600)
-    }
-    page.setData({
-      publicAnimation: btnsAnimation.export(),
-      pubcloseAnimation: closeAnimation.export()     
-    })
-  },
-  //每一个时光故事的删除、编辑弹窗显示及隐藏
-  itempupToggle:function(e){
-    var page=this;
-    var idx = e.currentTarget.dataset.idx;
-    var newArray = page.data.timeList;
-    newArray[idx].itempupHidden = !newArray[idx].itempupHidden;
-    page.setData({
-      timeList: newArray,
-    })
-  },
-  changeCover:function(){
-    var page=this;
-    wx.showModal({
-      title: '提示',
-      content: '确认更换时光封面？',
-      showCancel: true,
-      cancelColor: '#a0a0a0',
-      confirmColor: '#52d2af',
-      success: function (res) {
-        if (res.confirm) {
-          wx.chooseImage({
-            success: function(res) {
-              var tempFilePaths = res.tempFilePaths
-              page.setData({
-                headerBg:tempFilePaths[0]
-              })
-            },
+          loadmoreFlag = 1
+        },
+        complete:function(){  
+          wx.hideToast()   
+          page.setData({
+              loadingFlag:true
           })
         }
+  })
+};
+// 获取宝贝信息
+var  getBabyinfo =function(page,shareId,swithBaby,wxBizKey){
+        wx.request({
+          url: basePath+'/appFree/wxbizTime/getBabyInfo.do',
+          data: {
+            wxbizKey:wxBizKey,
+            shareId:shareId
+          },
+          method: 'GET',
+          header: {
+            'content-type': 'application/json'
+          }, 
+          success: function(res){
+            var babyInfo=res.data.babyInfo;
+            console.log(babyInfo)
+            if(babyInfo=={} || babyInfo==undefined){
+                wx.showModal({
+                  title: '无宝宝信息',
+                  content: '赶快添加宝宝，记录宝宝成长时光',
+                  showCancel:false,
+                  cancelColor:'#a0a0a0',
+                  confirmColor:'#52d2af',
+                  success: function(res) {
+                    if (res.confirm) {
+                        wx.navigateTo({
+                          url: '../babyCenter/babyCenter',
+                          complete:function(){
+                               wx.hideToast()
+                          }
+                      })
+                    }
+                  }
+                })
+              }else{
+                  page.setData({
+                      babyInfo:babyInfo,
+                      babyFlag:babyInfo.babyFlag,
+                      picFlag:babyInfo.picFlag,
+                      updateFlag:babyInfo.updateFlag                    
+                  })
+                  setTimeout(function(){
+                    page.setData({
+                        babyheadUrl:babyInfo.headUrl
+                    })
+                  },400)
+                  console.log(babyInfo.userId)
+                  wx.setStorageSync('shareId', babyInfo.userId)
+                  wx.setStorageSync('childrenId', babyInfo.id)
+                  userId=babyInfo.userId                 
+              }             
+          },
+          fail: function(){
+            console.log('获取宝贝信息fail')
+          },
+          complete:function(){
+              // if(swithBaby){
+              //     wx.showToast({
+              //       title: '已切换到自己的宝宝',
+              //       icon: 'success',
+              //       duration: 5000,
+              //       mask:true
+              //     })
+              // }
+          }
+    })
+  }
+Page({
+  data: {
+    imgPath:app.globalData.imgPath,
+    basePath:app.globalData.basePath,
+    switchBabyDisabled:false,
+    getUerinfo:false,
+    publichidden:true,
+    publicAnimation:{},
+    babyInfo:{},
+    timeList:[],
+    loadingFlag:true,
+    babyFlag:10,
+    updateFlag:11,
+    picFlag:11,
+    timeCount:1,
+    babyheadUrl:''
+  },
+  onHide:function(){
+    this.hidebtns()
+  },
+  onShow:function(){
+    var page = this;
+    endMonth=0;
+    endYear=0;
+    timeCount=1;
+    timeCurcount=0;
+    loadmoreFlag =0;
+    showfinishFlag=true;//是否显示全部加载完成弹窗
+    page.setData({
+      timeList:[],
+      babyInfo:{}
+    })
+    wx.showToast({
+        title: '加载中...',
+        icon: 'loading',
+        duration: 3000,
+        mask:true
+      })
+    app.checkInfo(function(){
+      try {
+        var wxBizKey = wx.getStorageSync('wxBizKey');
+        console.log('index.wxBizKey = ' + wxBizKey);
+        //获取时光分页列表
+          getList(page,shareId,1,wxBizKey)
+        // 获得宝宝信息
+         getBabyinfo(page,shareId,false,wxBizKey)
+      } 
+      catch (e) {
+      }
+    },isShared)
+  },
+  onReachBottom:function(){
+    var page = this;
+    if(loadmoreFlag !=0){
+        if(timeCurcount<timeCount){
+          app.checkInfo(function() {
+            try {
+              var wxBizKey = wx.getStorageSync('wxBizKey');
+              //获取时光分页列表
+              getList(page,shareId,0,wxBizKey)
+            } 
+            catch (e) {
+            }
+          })
+        }else{
+          if(showfinishFlag){
+              wx.showToast({
+                title: '已全部加载',
+                icon: 'success',
+                duration: 1000,
+                mask:true
+              })
+          }
+          showfinishFlag=false
+        }
+    }
+  },
+  onPullDownRefresh:function(){
+    var page=this;
+    console.log('刷新');
+  },
+  onLoad: function (options) {
+    var page = this;
+    // options.userId = 11952;
+    //判断是否携带userId，有的话则判断是从分享链接进入
+    if(options.userId != '' && options.userId!=undefined){
+      shareId= options.userId;
+      isShared = '1';
+      wx.setStorageSync('shareId',shareId)
+    }
+    else {
+      shareId = wx.getStorageSync('shareId');
+    }
+    showfinishFlag=true;//是否显示全部加载完成弹窗   
+    // 获取系统信息
+    wx.getSystemInfo({
+      success: function(res) {
+        var scrollHeight=res.windowHeight
+        page.setData({
+          scrollHeight:scrollHeight - 164 + 'px'
+        })
       }
     })
   },
-  // 发布照片
-  upPhotos:function(e){
-      var page=this;
-      var count=9;
-      var imgsPath = [];
-      var upTypeFlag='0'
-      util.addImg(page, count, true, imgsPath, upTypeFlag) 
-  },
-  // 发布视频
-  upVideo:function(e){
-      var page=this;
-      var imgsPath = [];
-      var upTypeFlag = '1'
-      util.addVideo(page, true, imgsPath, upTypeFlag) 
-  },
-  // 跳转到详情页
-  toDetail: function (e) {
-    wx.navigateTo({
-      url: '../detail/detail',
+  // 显示弹窗
+  showbtns:function(e){
+    var page=this;
+    var childrenId=wx.getStorageSync('childrenId')
+    if( childrenId == '' || childrenId==undefined|| childrenId == null){
+        wx.showModal({
+           title: '无宝宝信息',
+            content: '没有宝宝，不能发表成长信息哦！',
+            showCancel:true,
+            cancelColor:'#a0a0a0',
+            confirmColor:'#52d2af',
+            success: function(res) {
+              if (res.confirm) {
+                  wx.navigateTo({
+                      url: '../babyCenter/babyCenter'
+                  })
+              }
+            }
+        })
+        return
+    }
+    var animation = wx.createAnimation({
+        duration: 800,
+        timingFunction: 'ease',
+    })
+    page.animation = animation
+    animation.scale(1).step()
+    page.setData({
+      publichidden:false,
+      publicAnimation:animation.export()
     })
   },
-  // 跳转到回忆故事
-  toMemories: function (e) {
-    wx.navigateTo({
-      url: '../memories/memories',
+  // 隐藏弹窗
+  hidebtns:function(e){
+    var page=this;
+    var animation = wx.createAnimation({
+        duration: 800,
+        timingFunction: 'ease',
+    })
+    page.animation = animation
+    animation.scale(0).step()
+    page.setData({
+      publichidden:true,
+      publicAnimation:animation.export()
     })
   },
-  // 跳转到云相册
-  toAlbum:function(e){
+  // 发布成长时光
+  showPublic:function(e){
+    var page=this;
+    var pubTypeId=e.currentTarget.dataset.id;
+    page.hidebtns();
+    var childrenId=wx.getStorageSync('childrenId')
+    if( childrenId == '' || childrenId==undefined|| childrenId==null){
+        wx.showModal({
+           title: '无宝宝信息',
+            content: '没有宝宝，不能发表成长信息哦！',
+            showCancel:true,
+            cancelColor:'#a0a0a0',
+            confirmColor:'#52d2af',
+            success: function(res) {
+              if (res.confirm) {
+                  wx.navigateTo({
+                      url: '../babyCenter/babyCenter'
+                  })
+              }
+            }
+        })
+        return
+    }
+    wx.showActionSheet({
+        itemList: ['拍照', '从相册中选择'],
+        success: function(res) {
+          var tapIndex=res.tapIndex;
+          var sourceType=['camera','album'];
+          var sizeType=['compressed'];
+          var count=9;
+          var imgsPath=[];
+          if(tapIndex > -1){
+              sourceType=sourceType[tapIndex].split(",")
+              console.log(sourceType)
+              //util.addImg(page,sourceType,sizeType,count,true,imgsPath) 
+              app.checkInfo(function(){
+                  try {
+                      var wxBizKey = wx.getStorageSync('wxBizKey');
+                        util.addImg(page,sourceType,sizeType,count,true,imgsPath,wxBizKey) 
+                  } 
+                  catch (e) {
+                  }
+              })            
+          }
+        }
+    })   
+  },
+  // 发布活动秀
+  showActivity:function(e){
     wx.navigateTo({
-      url: '../album/album',
+      url: '../acitivityList/acitivityList',
+      success: function(res){
+        // success
+      }
+    })
+    this.hidebtns()
+  },
+  showDetails:function(e){
+    var month=e.target.dataset.month;
+    var year=e.target.dataset.year;
+    wx.navigateTo({
+      url: '../mouthPics/mouthPics?month='+month+'&&year='+year
     })
   },
-  // 跳转到里程碑
-  topMilestone:function(){
-    wx.navigateTo({
-      url: '../milestone/milestone',
-    })
+  // 设置分享
+  onShareAppMessage:function(e){
+    //app.onShareAppMessage(e)
+    var title = '时光·妈妈蜜';
+    var path = '/pages/index/index?userId=' + userId + '';
+    return {
+      title: title,
+      path: path,
+      success: function(res) {
+        console.log(userId);
+      }
+    }
   },
-  // 跳转到宝贝中心
-  toBabycenter:function(){
+  // 编辑宝宝信息
+  editPortrait:function(e){
+    var page=this;
     wx.navigateTo({
       url: '../babyCenter/babyCenter',
     })
   },
-  // 跳转到活动秀
-  toActivity:function(){
-    wx.navigateTo({
-      url: '../acitivityList/acitivityList',
-    })
-  },
-  toMorebaby:function(){
-    wx.navigateTo({
-      url: '../moreBaby/moreBaby',
-    })
-  },
-  toInviterelate: function () {
-    wx.navigateTo({
-      url: '../inviteRelate/inviteRelate',
-    })
-  },
-  // 跳转到发布中心
-  topublicPics:function(){
-    var page = this;
-    var count = 9;
-    var imgsPath = [];
-    var upTypeFlag = '3'
-    util.addImg(page, count, true, imgsPath, upTypeFlag) 
+  // 切换宝宝
+  switchBaby:function(){
+      var page=this;
+      timeCurcount=0;
+      timeCount=1;
+      shareId= '';
+      endMonth=0;
+      endYear=0;
+      showfinishFlag=true;//是否显示全部加载完成弹窗
+      page.setData({
+        timeList:[],
+        babyFlag:10,
+        updateFlag:11,
+        picFlag:11,
+        babyInfo:{},
+        babyheadUrl:'',
+        timeCount:1
+      })
+      wx.showToast({
+        title: '加载中...',
+        icon: 'loading',
+        duration: 3000,
+        mask:true
+      })
+      wx.clearStorageSync('isShare');
+      app.checkInfo(function(){
+        try {
+          var wxBizKey = wx.getStorageSync('wxBizKey');
+          // console.log('index.wxBizKey = ' + wxBizKey);
+          //获取时光分页列表
+          if(timeCurcount<timeCount){
+            getList(page,shareId,1,wxBizKey)
+          }
+          // 获得宝宝信息
+          getBabyinfo(page,shareId,true,wxBizKey)
+        } 
+        catch (e) {
+        }
+      })
   }
 })

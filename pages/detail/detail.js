@@ -25,11 +25,7 @@ function genImgListData() {
 Page({
   data: {
     ItemLayout: false,
-    typeFlag:'1',
-    videoCtr:true,
-    picList: genImgListData(),
-    posterUrl:'http://img10.360buyimg.com/img/s600x600_jfs/t3586/215/2086933702/144606/c5885c8b/583e2f08N13aa7762.png',
-    videoUrl:'http://static.recachina.com/video/oceans.mp4'
+    picList: genImgListData()
   },
   onLoad:function(options){
     var page=this;
@@ -48,6 +44,7 @@ Page({
   },
   //加载完成后的回调
   imageOnLoad(err, data) {
+    console.log('图片加载完成', err, data.src)
     const imgList = this.data.picList.map(item => {
       if (item.url == data.src)
         item.loaded = true

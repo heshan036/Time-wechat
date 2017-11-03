@@ -19,9 +19,6 @@
         <input value="{{date}}" name="birthday" disabled  style="display:none"/>
     </view>
     <view class="choseList">
-      <view class="picker"><text>与宝宝关系：</text><text class="tr">{{relation}}</text></view>
-    </view>
-    <view class="choseList">
         <text>性别：</text>
         <radio-group class="radio-group" bindchange="radioChange" name="gender">
             <label class="radio" wx:for="{{items}}" wx:key="{{item.name}}">

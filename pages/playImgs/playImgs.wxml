@@ -1,21 +1,10 @@
 <!--pages/playImgs/playImgs.wxml-->
 <view class="container">
-    <view class="playWrapper">
-      <swiper circular="false" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange" class="playBox playBox_{{category}}">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="playBox">
         <block wx:for="{{imgUrls}}">
           <swiper-item>
-            <view wx:if="{{item.txt != ''}}" class="imgmMask"><text>{{item.txt}}</text></view>
-            <image src="{{item.show ? item.url : '/assets/imgs/default.png'}}" class="slide-image" mode="aspectFit"/>
+            <image src="{{item}}" class="slide-image" width="355" height="150"/>
           </swiper-item>
         </block>
       </swiper>
-      <view class="playMask">
-        <image src="{{maskBg}}" mode="aspectFit"></image>
-      </view>
-    </view>
-    <audio src="{{audiosrc}}" id="myAudio" loop></audio>
-    <view class="control">
-      <view bindtap="control"><span class="iconfont icon-{{playState?'zanting':'bofang'}}"></span></view>
-      <text>点击播放 暂停</text>
-    </view>
 </view>
